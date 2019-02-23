@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import Piano from './components/Piano';
+import Keyboard from './components/Keyboard';
 
 class App extends Component {
   render() {
-    return <Piano />
+    return <Keyboard />;
   }
 }
 
