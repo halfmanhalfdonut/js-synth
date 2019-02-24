@@ -13,7 +13,6 @@ class Event {
 
   removeListener(name, callback) {
     if (this.listeners[name]) {
-      console.log('Has callback?', this.listeners[name].has(callback));
       this.listeners[name].delete(callback);
     }
   }

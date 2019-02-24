@@ -1,0 +1,16 @@
+.waves {
+  text-align: center;
+  margin: 10px auto 20px;
+}
+
+.button {
+  margin: 0 2px;
+  border: 1px solid #CCC;
+  background: #f3f3f3;
+  color: #222;
+}
+
+.selected {
+  border-color: dodgerblue;
+  color: dodgerblue;
+}

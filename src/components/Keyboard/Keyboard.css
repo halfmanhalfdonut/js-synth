@@ -1,0 +1,41 @@
+.keyboard {
+  margin: 0 auto;
+  width: 700px;
+  height: 300px;
+  padding: 0;
+  flex-flow: column;
+  display: flex;
+  flex: 4;
+}
+
+.keys {
+  height: 100%;
+  display: flex;
+  flex: 8;
+  justify-content: center;
+}
+
+.key {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.key-white {
+  flex-flow: column;
+  justify-content: flex-end;
+  outline: 1px solid #222;
+  color: #222;
+  background-color: white;
+  padding-bottom: 10px;
+}
+
+.key-black {
+  justify-content: center;
+  position: relative;
+  height: 70%;
+  background-color: #222;
+  color: white;
+  width: 8%;
+  margin: -1px -29px;
+}
