@@ -2,21 +2,14 @@ import React, { Component } from 'react';
 
 import './ControlRow.css';
 import Wave from '../Wave';
+import Octave from '../Octave';
 
 export default class ControlRow extends Component {
   render() {
     return (
       <div className="control-row">
         <div className="control-row-group">
-          <div className="control-row-title">Octave</div>
-          <div className="control-item">
-            <div className="control-name">Down</div>
-            <div className="control-letter">z</div>
-          </div>
-          <div className="control-item">
-            <div className="control-name">Up</div>
-            <div className="control-letter">x</div>
-          </div>
+          <Octave onChange={ this.props.onOctaveChange } />
         </div>
         <div className="control-row-group">
           <Wave onChange={ this.props.onWaveChange } />
