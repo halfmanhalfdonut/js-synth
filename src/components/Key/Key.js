@@ -35,6 +35,7 @@ export default class Key extends Component {
     if (!this.state.isPlaying) {
       this.oscillator = audioContext.createOscillator();
       this.gain = audioContext.createGain();
+      this.gain.gain.value = 0.1;
 
       this.oscillator.type = this.props.wave || DEFAULT_WAVE;
       this.oscillator.connect(this.gain);
