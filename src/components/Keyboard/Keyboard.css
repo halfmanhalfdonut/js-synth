@@ -6,6 +6,7 @@
   flex-flow: column;
   display: flex;
   flex: 4;
+  position: relative;
 }
 
 .keys {
@@ -19,15 +20,18 @@
   flex: 1;
   display: inline-flex;
   align-items: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .key-white {
   flex-flow: column;
   justify-content: flex-end;
-  outline: 1px solid #222;
+  border: 1px solid #e3e3e3;
   color: #222;
   background-color: white;
   padding-bottom: 10px;
+  margin: 0 1px;
 }
 
 .key-black {
@@ -37,5 +41,17 @@
   background-color: #222;
   color: white;
   width: 8%;
-  margin: -1px -29px;
+  margin: 0 -29px;
+}
+
+.note-name {
+  opacity: 0.5;
+  font-size: 12px;
+  position: absolute;
+  bottom: 10px;
+}
+
+.keyboard-letter {
+  position: absolute;
+  bottom: 30px;
 }

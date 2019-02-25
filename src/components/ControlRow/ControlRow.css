@@ -1,0 +1,42 @@
+.control-row {
+  margin: 20px auto;
+  width: 700px;
+  display: flex;
+  flex-direction: row;
+}
+
+.control-row-group {
+  position: relative;
+  margin-right: 50px;
+}
+
+.control-row-title {
+  font-size: 12px;
+  width: 100%;
+  margin: 0 10px 7px;
+}
+
+.control-item {
+  position: relative;
+  display: inline-block;
+  margin: 0 5px;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  background: #f9f9f9;
+  box-shadow: 0 0 2px #999;
+  border: none;
+  padding: 0;
+}
+
+.control-name {
+  font-size: 12px;
+  opacity: 0.5;
+  margin: 10px auto 5px;
+  text-align: center;
+}
+
+.control-letter {
+  margin: 0 auto;
+  text-align: center;
+}

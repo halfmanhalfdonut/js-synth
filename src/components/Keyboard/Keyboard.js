@@ -6,7 +6,7 @@ import data from '../../data/notes.json';
 import Event from '../../services/Event';
 
 import Key from '../Key';
-import Wave from '../Wave';
+import ControlRow from '../ControlRow';
 
 const MIDDLE_C = 'C4';
 const OCTAVE = 12;
@@ -32,6 +32,7 @@ export default class Keyboard extends Component {
     this.triggerNote = this.triggerNote.bind(this);
     this.handleOctaveUp = this.handleOctaveUp.bind(this);
     this.handleOctaveDown = this.handleOctaveDown.bind(this);
+    this.handleOctaveChange = this.handleOctaveChange.bind(this);
     this.handleWaveChange = this.handleWaveChange.bind(this);
     this.getKeys = this.getKeys.bind(this);
   }
@@ -53,10 +54,29 @@ export default class Keyboard extends Component {
   handleKeyUp(e) {
     if (NOTE_KEYS.includes(e.key)) {
       this.triggerNote(e.key, 'up');
-    } else if (e.key === 'z') {
-      this.handleOctaveDown();
-    } else if (e.key === 'x') {
-      this.handleOctaveUp();
+    } else {
+      switch (e.key) {
+        case 'z':
+          this.handleOctaveDown();
+          break;
+        case 'x':
+          this.handleOctaveUp();
+          break;
+        case 'v':
+          this.handleWaveChange('sine');
+          break;
+        case 'b':
+          this.handleWaveChange('sawtooth');
+          break;
+        case 'n':
+          this.handleWaveChange('square');
+          break;
+        case 'm':
+          this.handleWaveChange('triangle');
+          break;
+        default:
+          break;
+      }
     }
   }
 
@@ -103,6 +123,15 @@ export default class Keyboard extends Component {
     this.setState({
       wave: type
     });
+    Event.trigger('wave-change', type);
+  }
+
+  handleOctaveChange(direction) {
+    if (direction === "up") {
+      this.handleOctaveUp();
+    } else if (direction === "down") {
+      this.handleOctaveDown();
+    }
   }
 
   getKeys() {
@@ -113,14 +142,13 @@ export default class Keyboard extends Component {
   render() {
     return (
       <React.Fragment>
-        <div class="waves">
-          <Wave onChange={ this.handleWaveChange } />
-        </div>
         <div className="keyboard" onKeyDown={ this.handleKeyDown } onKeyUp={ this.handleKeyUp } tabIndex="0">
           <div className="keys">
-            { this.state.range.map((key, index) => <Key key={key.name} note={ key.name } frequency={ key.frequency } index={ this.state.start + index + 1 } wave={ this.state.wave } />) }
+            { this.state.range.map((key, index) => <Key key={key.name} note={ key.name } frequency={ key.frequency } index={ index } wave={ this.state.wave } />) }
           </div>
         </div>
+
+        <ControlRow onWaveChange={ this.handleWaveChange } onOctaveChange={ this.handleOctaveChange } />
       </React.Fragment>
     );
   }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Wave.css';
 
+import Event from '../../services/Event';
+
 export default class Wave extends Component {
   state = {
     selected: 'sine'
@@ -11,25 +13,51 @@ export default class Wave extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.getCssClass = this.getCssClass.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
+  }
+
+  componentWillMount() {
+    Event.addListener('wave-change', this.handleUpdate);
+  }
+
+  componentWillUnmount() {
+    Event.removeListener('wave-change', this.handleUpdate);
   }
 
   handleClick(e) {
-    let wave = e.target.getAttribute('data-wave');
+    let wave = e.currentTarget.getAttribute('data-wave');
     this.setState({ selected: wave });
     this.props.onChange(wave);
   }
 
+  handleUpdate(type) {
+    this.setState({ selected: type });
+  }
+
   getCssClass(wave) {
-    return this.state.selected === wave ? 'button selected' : 'button';
+    return this.state.selected === wave ? 'control-item selected' : 'control-item';
   }
 
   render() {
     return (
       <React.Fragment>
-        <button className={this.getCssClass('sine')} type="button" onClick={this.handleClick} data-wave="sine">Sine</button>
-        <button className={this.getCssClass('sawtooth')} type="button" onClick={this.handleClick} data-wave="sawtooth">Sawtooth</button>
-        <button className={this.getCssClass('square')} type="button" onClick={this.handleClick} data-wave="square">Square</button>
-        <button className={this.getCssClass('triangle')} type="button" onClick={this.handleClick} data-wave="triangle">Triangle</button>
+        <div className="control-row-title">Waveform</div>
+        <div className={this.getCssClass('sine')} onClick={this.handleClick} data-wave="sine">
+          <div className="control-name">Sine</div>
+          <div className="control-letter">v</div>
+        </div>
+        <div className={this.getCssClass('sawtooth')} onClick={this.handleClick} data-wave="sawtooth">
+          <div className="control-name">Sawtooth</div>
+          <div className="control-letter">b</div>
+        </div>
+        <div className={this.getCssClass('square')} onClick={this.handleClick} data-wave="square">
+          <div className="control-name">Square</div>
+          <div className="control-letter">n</div>
+        </div>
+        <div className={this.getCssClass('triangle')} onClick={this.handleClick} data-wave="triangle">
+          <div className="control-name">Triangle</div>
+          <div className="control-letter">m</div>
+        </div>
       </React.Fragment>
     );
   }

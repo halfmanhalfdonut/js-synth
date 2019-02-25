@@ -5,6 +5,7 @@ import Event from '../../services/Event';
 
 const DEFAULT_DURATION = 1.5;
 const DEFAULT_WAVE = 'sine';
+const KEY_INDICES = `awsedftgyhujkolp;'`.split('');
 
 export default class Key extends Component {
   state = {
@@ -16,6 +17,7 @@ export default class Key extends Component {
 
     this.handlePlay = this.handlePlay.bind(this);
     this.handleStop = this.handleStop.bind(this);
+    this.getClassName = this.getClassName.bind(this);
   }
 
   componentWillMount() {
@@ -52,12 +54,17 @@ export default class Key extends Component {
     }
   }
 
-  render() {
+  getClassName() {
     let keyType = this.props.note.indexOf('#') > -1 ? 'key-black' : 'key-white';
-    keyType += ' key';
+    return keyType += ` key ${KEY_INDICES[this.props.index]}`;
+  }
 
-    return (<div className={ keyType } onPointerDown={ this.handlePlay } onPointerUp={ this.handleStop }>
-      { this.props.note }
+  render() {
+
+
+    return (<div className={ this.getClassName(this.props.note) } onPointerDown={ this.handlePlay } onPointerUp={ this.handleStop }>
+      <div className="note-name">{ this.props.note }</div>
+      <div className="keyboard-letter">{ KEY_INDICES[this.props.index] }</div>
     </div>);
   }
 };
