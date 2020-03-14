@@ -57,7 +57,7 @@ export default class Key extends Component {
 
   getClassName() {
     let keyType = this.props.note.indexOf('#') > -1 ? 'key-black' : 'key-white';
-    return keyType += ` key ${KEY_INDICES[this.props.index]}`;
+    return `${keyType} key ${KEY_INDICES[this.props.index]} ${this.state.isPlaying ? 'key-pressed' : '' }`;
   }
 
   render() {
